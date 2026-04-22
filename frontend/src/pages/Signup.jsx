@@ -1,25 +1,34 @@
 import { useState } from "react";
 import api from "../api/axios.js";
 
-export default function Signup() {
+export default function Signup() { 
 
     const [form , setForm] = useState({
         name:"",
         email:"",
         password:"", 
-    })
+    });
 
     const [msg , setMsg] = useState("");
 
     const handleChange = (e)=>{
         setForm
-    }
+    };
 
     const handleSubmit=(e)=>{
         e.preventDefault;
-    }
+    };
 
     return( 
+      <div className="flex iteam-center">
+        <div className="bg-white">
+          <h2 className="text-2xl">
+
+          {msg && (
+        <div className="mb-4 text-center">
+            {msg}
+        </div>
+    )};
 <form
     onSubmit={handleSubmit}
     class="mx-auto max-w-md space-y-4 rounded-lg border border-gray-300 bg-gray-100 p-6"
@@ -33,7 +42,7 @@ export default function Signup() {
         class="mt-1 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none"
         id="name"
         type="text"
-        placeholder="Your name"
+        placeholder="Enter your name"
         value={form.name}
         onChange={handleChange}
         required
@@ -48,8 +57,12 @@ export default function Signup() {
       <input
         class="mt-1 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none"
         id="email"
+        name="email"
         type="email"
         placeholder="Your email"
+        value={form.email}
+        onChange={handleChange}
+        required
       />
     </div>
 
@@ -63,6 +76,9 @@ export default function Signup() {
         id="password"
         type="password"
         placeholder="Your password"
+        value={form.password}
+        onChange={handleChange}
+        required
       />
     </div>
 
@@ -73,12 +89,14 @@ export default function Signup() {
       Create account
     </button>
 
-    {msg && (
-        <div className="mb-4 text-center">
-            {msg}
-        </div>
-    )}
+    
   </form>
+
+
+          </h2>
+        </div>
+      </div>
+      
     )
   
 };
