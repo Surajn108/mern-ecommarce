@@ -1,15 +1,12 @@
-import Products from "../models/Products";
+import Products from "../models/Products.js";
 
 // Create new Products
 export const createProduct = async (req, res) => {
   console.log(req.body);
 
   try {
-    if (!req.body) {
-      return res.status(400).json({ message: "Body is missing" });
-    }
-
-    const product = await product.create(req, body);
+   
+    const product = await Products.create(req.body);
     res.json({ message: "Product Created Successfuly" });
   } catch (err) {
     res.status(500).json({ message: "Product creation Fail", err });

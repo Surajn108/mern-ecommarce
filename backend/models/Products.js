@@ -22,9 +22,9 @@ const productSchema = new mongoose.Schema({
   stock: {
     type: Number,
     default: 0,
-  },
+  }},{
   timeStamp: true,
 });
 
-const Products = new mongoose.model("Product", productSchema);
+const Products = new mongoose.model("Products", productSchema);
 export default Products;
