@@ -12,93 +12,98 @@ export default function Signup() {
     const [msg , setMsg] = useState("");
 
     const handleChange = (e)=>{
-        setForm
+        setForm({
+          ...form,
+          [e.target.name] : e.target.value ,
+        });
     };
 
-    const handleSubmit=(e)=>{
-        e.preventDefault;
+    const handleSubmit=async(e)=>{
+        e.preventDefault();
+        try{
+          const response =  await api.post("/auth/signup" , form);
+          setMsg(response.data.message);
+        }catch(error){
+          setMsg(error?.response?.data?.message || "An error occured");
+        }
     };
 
     return( 
-      <div className="flex iteam-center">
-        <div className="bg-white">
-          <h2 className="text-2xl">
-
-          {msg && (
-        <div className="mb-4 text-center">
-            {msg}
-        </div>
-    )};
-<form
-    onSubmit={handleSubmit}
-    class="mx-auto max-w-md space-y-4 rounded-lg border border-gray-300 bg-gray-100 p-6"
-  >
-    <div>
-      <label class="block text-sm font-medium text-gray-900" for="name">
-        Name
-      </label>
-
-      <input
-        class="mt-1 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none"
-        id="name"
-        type="text"
-        placeholder="Enter your name"
-        value={form.name}
-        onChange={handleChange}
-        required
-      />
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-900" for="email">
-        Email
-      </label>
-
-      <input
-        class="mt-1 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none"
-        id="email"
-        name="email"
-        type="email"
-        placeholder="Your email"
-        value={form.email}
-        onChange={handleChange}
-        required
-      />
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-900" for="password">
-        Password
-      </label>
-
-      <input
-        class="mt-1 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none"
-        id="password"
-        type="password"
-        placeholder="Your password"
-        value={form.password}
-        onChange={handleChange}
-        required
-      />
-    </div>
-
-    <button
-      class="block w-full rounded-lg border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-indigo-600"
-      type="submit"
-    >
-      Create account
-    </button>
-
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+  <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md space-y-4">
     
-  </form>
+    <h2 className="text-2xl font-semibold text-center text-gray-800">
+      Create Account
+    </h2>
 
-
-          </h2>
-        </div>
+    {msg && (
+      <div className="text-center text-sm text-red-500">
+        {msg}
       </div>
+    )}
+
+    <form onSubmit={handleSubmit} className="space-y-4">
+
+      {/* Name */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Name
+        </label>
+        <input
+          type="text"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          placeholder="Enter your name"
+          className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          required
+        />
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Email
+        </label>
+        <input
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Your email"
+          className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          required
+        />
+      </div>
+
+      {/* Password */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Password
+        </label>
+        <input
+          type="password"
+          name="password"
+          value={form.password}
+          onChange={handleChange}
+          placeholder="Your password"
+          className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          required
+        />
+      </div>
+
+      {/* Button */}
+      <button
+        type="submit"
+        className="w-full py-2 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition"
+      >
+        Create Account
+      </button>
+
+    </form>
+  </div>
+</div>
       
     )
   
 };
-
-
