@@ -47,21 +47,21 @@ export const loginUser =  async(req , res)=>{
     }
 
     const {email , password} = req.body ;
-    const user = await User.findOne({ email });
 
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: "User do not exists" });
     }
 
-    const comparePass = bcrypt.compare(password , user.password);
+    const comparePass = await bcrypt.compare(password , user.password);
 
     if(!comparePass){
-      res.status(400).json({message:"Invalid Password"})
+      return res.status(400).json({message:"Invalid Password"})
     }
 
     //Create JWT token
     const token = jwt.sign(
-      {id: user.__id},
+      {id: user._id},
       process.env.JWT_SECRET,
       {expiresIn : "1d"},
     );
@@ -70,7 +70,7 @@ export const loginUser =  async(req , res)=>{
       message: "Login sucssesfull!",
       token ,
       user:{
-        id : user__id ,
+        id : user._id ,
         name : user.name ,
         email: user.email,
       }
