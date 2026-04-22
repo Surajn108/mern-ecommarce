@@ -1,30 +1,42 @@
 import { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import api from "../api/axios.js";
+import {useNavigate} from 'react-router';
 
 export default function Login(){
 
     const [form , setForm] = useState({
         email:"",
         password:"",
-    })
+    });
 
-    const [mse , setMsg] = useState("");
+    const [msg , setMsg] = useState("");
+    const navigate = useNavigate();
 
     const handleChange = (e)=>{
         setForm({
             ...form ,
             [e.target.name]:e.target.value,
         })
-    }
+    };
 
     const handleSubmit = async(e) =>{
-        e.preventDafault();
+        e.preventDefault();
 
         try{
-            const response =await api.post("/auth/login", form);
-            setMsg(response.data.message);
+            const res =await api.post("/auth/login", form);
+            
+            //save to local Storage
+            localStorage.setItem("token",res.data.token);
+
+            setMsg("Login Successful");
+
+            //Redirect to the Home page
+            setTimeout(()=>{
+                navigate("/");
+            }, 1000);
+
         }catch(error){
-            setMeg(error?.response?.data?.message || "An error occured")
+            setMsg(error?.response?.data?.message || "An error occured");
         }
 
     };
@@ -90,4 +102,4 @@ export default function Login(){
   </div>
         
       )
-}
+};
