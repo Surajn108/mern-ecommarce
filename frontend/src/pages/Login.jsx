@@ -48,7 +48,7 @@ export default function Login() {
         {msg && <div className="text-center text-sm text-red-500">{msg}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Email */}
+          
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email
@@ -64,7 +64,7 @@ export default function Login() {
             />
           </div>
 
-          {/* Password */}
+         
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Password
@@ -80,7 +80,7 @@ export default function Login() {
             />
           </div>
 
-          {/* Button */}
+         
           <button
             type="submit"
             className="w-full py-2 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition"
