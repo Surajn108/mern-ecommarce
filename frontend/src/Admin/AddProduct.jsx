@@ -45,16 +45,8 @@ export default function AddProduct() {
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {Object.keys(form).map((key) => (
-            <input
-              key={key}
-              name={key}
-              value={form[key]}
-              onChange={handleChange}
-              placeholder={key}
-              className="w-full p-2 border-gray-300"
-            />
-          ))}
+          
+          
 
           <button
             type="submit"
