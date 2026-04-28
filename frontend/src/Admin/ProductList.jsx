@@ -14,7 +14,7 @@ export default function ProductList() {
     try{
         await api.delete("");
     }catch (error) {
-      setMsg(error?.response?.data?.message || "An error occured");
+      setMsg(error?.response?.data?.message || "An error occured while deleting Product");
     }
   };
   useEffect(() => {
