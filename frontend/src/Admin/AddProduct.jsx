@@ -25,12 +25,10 @@ export default function AddProduct() {
     e.preventDefault();
 
     try{
-
         await api.post('/products/add', form);
 
         alert("Product Added Successfully!");
-        navigate("/admin/products")
-
+        navigate("/admin/products");
 
     }catch (error) {
       setMsg(error?.response?.data?.message || "An error occured");
