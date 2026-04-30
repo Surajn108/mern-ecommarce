@@ -1,4 +1,4 @@
-import mongoose, { model } from "mongoose";
+import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
   title: {
@@ -22,9 +22,10 @@ const productSchema = new mongoose.Schema({
   stock: {
     type: Number,
     default: 0,
-  }},{
-  timeStamp: true,
+  },
+}, {
+  timestamps: true,
 });
 
-const Products = new mongoose.model("Products", productSchema);
+const Products = mongoose.model("Products", productSchema);
 export default Products;

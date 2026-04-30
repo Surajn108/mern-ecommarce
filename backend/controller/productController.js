@@ -5,7 +5,6 @@ export const createProduct = async (req, res) => {
   console.log(req.body);
 
   try {
-   
     const product = await Products.create(req.body);
     res.json({ message: "Product Created Successfuly" });
   } catch (err) {
@@ -14,17 +13,18 @@ export const createProduct = async (req, res) => {
 };
 // Get all the Products
 export const getProducts = async (req, res) => {
-  console.log(req.body);
-
   try {
     const products = await Products.find().sort({ createdAt: -1 });
 
     res.status(200).json({
-      message: "Products ",
+      message: "Products fetched successfully",
       products,
     });
   } catch (err) {
-    res.status(500).json({ message: "Products not Found", err });
+    res.status(500).json({
+      message: "Products not Found",
+      error: err.message,
+    });
   }
 };
 
@@ -82,6 +82,3 @@ export const deleteProduct = async (req, res) => {
     res.status(500).json({ message: "Server Error", err });
   }
 };
-
-
- 
