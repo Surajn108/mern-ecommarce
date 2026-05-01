@@ -32,33 +32,44 @@ export default function Home() {
             setSearch(e.target.value);
           }}
         ></input>
+
+        {/*Category*/}
+        <select
+          className="border p-2 py-2 rounded "
+          value={category}
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
+        >
+          <option value="">All category</option>
+
+          <option value="Laptop">Laptop</option>
+
+          <option value="fashion ">fashion</option>
+
+          <option value="mobile">mobile</option>
+          <option value="tablet">tablet</option>
+        </select>
       </div>
 
-      {/*Category*/}
-      <select
-        className="border p-2 py-2 rounded "
-        value={category}
-        onChange={(e) => {
-          setCategory(e.target.value);
-        }}
-      >
-        <option value="">All category</option>
-
-        <option value="Laptop">Laptop</option>
-
-        <option value="fashion ">fashion</option>
-
-        <option value="mobile">mobile</option>
-        <option value="tablet">tablet</option>
-      </select>
+      {/* Products Grid */}
+      <div className="grid-cols-2  md:grid-cols-4  gap-5">
+        {product.map((product) => (
+          <Link
+            key={product._id}
+            to={`/product/${product._id}`}
+            className="border p-3 rounded shadow hover:shadow-lg transition"
+          >
+            <img
+              src={product.image}
+              alt={product.title}
+              className="w-full h-40 object-contain bg-white rounded"
+            />
+            <h2 className="mt-2 font-semibold text-lg">{product.title}</h2>
+            <p className="text-gray-600">${product.price}</p>
+          </Link>
+        ))}
+      </div>
     </div>
-
-        {/*Products Grid*/}
-        <div className="grid-col-2">
-            
-        </div>
-
-
-
   );
 }
