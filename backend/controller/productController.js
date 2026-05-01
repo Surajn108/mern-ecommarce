@@ -14,7 +14,20 @@ export const createProduct = async (req, res) => {
 // Get all the Products
 export const getProducts = async (req, res) => {
   try {
-    const products = await Products.find().sort({ createdAt: -1 });
+    // const products = await Products.find().sort({ createdAt: -1 });
+    const { search = "", category = "" } = req.query;
+
+    const filter = {};
+
+    if (search.trim()) {
+      filter.title = { $regex: search.trim(), $options: "i" };
+    }
+
+    if (category.trim()) {
+      filter.category = category.trim();
+    }
+
+    const products = await Products.find(filter).sort({ createdAt: -1 });
 
     res.status(200).json({
       message: "Products fetched successfully",

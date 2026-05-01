@@ -34,19 +34,20 @@ export default function Home() {
           className="border p-2 py-2 rounded "
           value={category}
           onChange={(e) => {
-            setCategory(e.target.value);
+              setCategory(e.target.value);
+             
           }}
         >
           <option value="">All category</option>
 
           <option value="Laptop">Laptop</option>
 
-          <option value="fashion">fashion</option>
+          <option value="Fashion">Fashion</option>
 
-          <option value="mobile">mobile</option>
-          <option value="camera">camera</option>
+          <option value="Mobile">Mobile</option>
+          <option value="Camera">Camera</option>
 
-          <option value="tablet">tablet</option>
+          <option value="Tablet">Tablet</option>
         </select>
       </div>
 
