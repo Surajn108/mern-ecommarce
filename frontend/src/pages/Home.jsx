@@ -3,22 +3,18 @@ import axios from "../api/axios.js";
 import { Link } from "react-router";
 
 export default function Home() {
-  const [product, setProduct] = useState([]);
-  const [search, setSearch] = useState([]);
-  const [category, setCategory] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
 
   const loadProducts = async () => {
-    const res = await api.get(`/products?search=${search}&category${category}`);
-    setProduct(res.data);
+    const res = await axios.get(`/products?search=${search}&category=${category}`);
+    setProducts(res.data.products || []);
   };
 
-  useEffect(
-    () => {
-      loadProducts();
-    },
-    [search],
-    [category],
-  );
+  useEffect(() => {
+    loadProducts();
+  }, [search, category]);
 
   return (
     <div className="p-6">
@@ -53,8 +49,8 @@ export default function Home() {
       </div>
 
       {/* Products Grid */}
-      <div className="grid-cols-2  md:grid-cols-4  gap-5">
-        {product.map((product) => (
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+        {products.map((product) => (
           <Link
             key={product._id}
             to={`/product/${product._id}`}
