@@ -1,6 +1,5 @@
 import Cart from "../models/Cart.js";
 
-
 // Add item in Cart
 export const addToCart = async (req, res) => {
   try {
@@ -25,7 +24,7 @@ export const addToCart = async (req, res) => {
     }
 
     if (iteam) {
-      iteam.quantity += 1; 
+      iteam.quantity += 1;
     } else {
       cart.items.push({ productId, quantity: 1 });
     }
@@ -37,8 +36,7 @@ export const addToCart = async (req, res) => {
   }
 };
 
-
-// Delete the Item 
+// Delete the Item
 export const removeItem = async (req, res) => {
   try {
     const { userId, productId } = res.body;
@@ -61,30 +59,38 @@ export const removeItem = async (req, res) => {
 };
 
 //Update Item Quantity
-export const updateQuantity = async (req, res)=>{
-    try{
+export const updateQuantity = async (req, res) => {
+  try {
+    const { userId, productId, quantity } = res.body;
 
-        const { userId, productId  , quantity} = res.body;
+    const cart = await Cart.findOne({ userId });
 
-        const cart = await Cart.findOne({userId})
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not Found" });
+    }
+    const item = cart.items.find((i) => i.productId.toString() !== productId);
 
-        if(!cart){
-            return res.status(404).json({ message: "Cart not Found" });
-        } 
-            const item = cart.items.find(
-              (i) => i.productId.toString() !== productId,
-            );
-          
-        if(!item){
-            return res.status(404).json({ message: "iteam not Found in cart" });
-        }
+    if (!item) {
+      return res.status(404).json({ message: "iteam not Found in cart" });
+    }
 
-        item.quantity = quantity;
+    item.quantity = quantity;
 
-        await cart.save();
-        res.status(200).json({ message: "Iteam quantity Updated", cart });
-
-    }catch (err) {
+    await cart.save();
+    res.status(200).json({ message: "Iteam quantity Updated", cart });
+  } catch (err) {
     res.status(500).json({ message: "Server Error", err });
+  }
+};
+
+// Get cart by user ID
+export const getCart = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const cart = await Cart.findOne({ userId }).populate("items.productId");
+
+    res.json(cart);
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error });
   }
 };
