@@ -20,3 +20,6 @@ router.post('/update', updateQuantity);
 
 //Get CArt ussing USerId
 router.get('/:userId',getCart);
+
+
+export default router ;
