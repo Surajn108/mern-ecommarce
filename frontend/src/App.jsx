@@ -3,6 +3,16 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
+import Navbar from "./components/navBar.jsx";
+
+function layout(){
+  return (
+    <>
+    <Navbar />
+    <Outlet />
+    </>
+  )
+}
 
 const router = createBrowserRouter([
   {path:"/" , element:<Home />},
