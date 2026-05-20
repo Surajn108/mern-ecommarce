@@ -14,10 +14,10 @@ import OrderSuccess from "./pages/OrderSuccess.jsx";
 
 function Layout() {
   return (
-    <>
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#dff7ff_0%,#f7fafc_42%,#eef2ff_100%)]">
       <Navbar />
       <Outlet />
-    </>
+    </div>
   );
 }
 
