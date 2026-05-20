@@ -60,9 +60,11 @@ export default function Home() {
                focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">All Categories</option>
-          <option value="Laptops">Laptops</option>
-          <option value="Mobiles">Mobiles</option>
-          <option value="Tablets">Tablets</option>
+          <option value="Laptop">Laptop</option>
+          <option value="Mobile">Mobile</option>
+          <option value="Tablet">Tablet</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Electronic">Electronic</option>
         </select>
       </div>
 
